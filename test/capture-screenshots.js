@@ -25,26 +25,74 @@ async function captureScreenshots() {
     // Navigate to the app
     await page.goto('http://localhost:5174', { waitUntil: 'networkidle2' });
 
-    // Click start button to get to game board
-    try {
-      const startButton = await page.$('button');
-      if (startButton) {
-        await startButton.click();
-        await page.evaluate(() => new Promise(resolve => setTimeout(resolve, 500)));
-      }
-    } catch (e) {
-      console.log('Could not find or click start button');
-    }
-
-    // Take screenshots at each viewport size
+    // 1. Capture home page (menu/StartScreen)
+    console.log('\n=== Capturing Home Page ===');
     for (const viewport of viewports) {
-      console.log(`Capturing ${viewport.name}...`);
+      console.log(`Capturing home-${viewport.name}...`);
       await page.setViewport({ width: viewport.width, height: viewport.height });
       await page.evaluate(() => new Promise(resolve => setTimeout(resolve, 300)));
 
-      const screenshotPath = path.join(__dirname, 'screenshots', `${viewport.name}.png`);
+      const screenshotPath = path.join(__dirname, 'screenshots', `home-${viewport.name}.png`);
       await page.screenshot({ path: screenshotPath, fullPage: true });
       console.log(`✓ Saved: ${screenshotPath}`);
+    }
+
+    // 2. Capture Bingo mode
+    console.log('\n=== Capturing Bingo Mode ===');
+    try {
+      // Click "PLAY BINGO" button
+      await page.evaluate(() => {
+        const buttons = Array.from(document.querySelectorAll('button'));
+        const bingoButton = buttons.find(btn => btn.textContent?.includes('PLAY BINGO'));
+        if (bingoButton) bingoButton.click();
+      });
+      
+      await page.evaluate(() => new Promise(resolve => setTimeout(resolve, 500)));
+      
+      for (const viewport of viewports) {
+        console.log(`Capturing bingo-${viewport.name}...`);
+        await page.setViewport({ width: viewport.width, height: viewport.height });
+        await page.evaluate(() => new Promise(resolve => setTimeout(resolve, 300)));
+
+        const screenshotPath = path.join(__dirname, 'screenshots', `bingo-${viewport.name}.png`);
+        await page.screenshot({ path: screenshotPath, fullPage: true });
+        console.log(`✓ Saved: ${screenshotPath}`);
+      }
+      
+      // Go back to menu
+      await page.evaluate(() => {
+        const buttons = Array.from(document.querySelectorAll('button'));
+        const backButton = buttons.find(btn => btn.textContent?.includes('Reset') || btn.textContent?.includes('Back'));
+        if (backButton) backButton.click();
+      });
+      await page.evaluate(() => new Promise(resolve => setTimeout(resolve, 500)));
+    } catch (e) {
+      console.log('Could not capture bingo mode:', e.message);
+    }
+
+    // 3. Capture Draw Cards mode
+    console.log('\n=== Capturing Draw Cards Mode ===');
+    try {
+      // Click "DRAW CARDS" button
+      await page.evaluate(() => {
+        const buttons = Array.from(document.querySelectorAll('button'));
+        const cardsButton = buttons.find(btn => btn.textContent?.includes('DRAW CARDS'));
+        if (cardsButton) cardsButton.click();
+      });
+      
+      await page.evaluate(() => new Promise(resolve => setTimeout(resolve, 500)));
+      
+      for (const viewport of viewports) {
+        console.log(`Capturing cards-${viewport.name}...`);
+        await page.setViewport({ width: viewport.width, height: viewport.height });
+        await page.evaluate(() => new Promise(resolve => setTimeout(resolve, 300)));
+
+        const screenshotPath = path.join(__dirname, 'screenshots', `cards-${viewport.name}.png`);
+        await page.screenshot({ path: screenshotPath, fullPage: true });
+        console.log(`✓ Saved: ${screenshotPath}`);
+      }
+    } catch (e) {
+      console.log('Could not capture draw cards mode:', e.message);
     }
 
     console.log('All screenshots captured successfully!');

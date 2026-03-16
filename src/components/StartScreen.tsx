@@ -1,7 +1,7 @@
 import { questions, FREE_SPACE } from '../data/questions';
 
 interface StartScreenProps {
-  onStart: () => void;
+  onStart: (mode: 'bingo' | 'cards') => void;
 }
 
 const previewItems: string[] = [
@@ -76,7 +76,7 @@ export function StartScreen({ onStart }: StartScreenProps) {
 
           {/* Tagline with text glow */}
           <p className="text-accent text-base tracking-[0.45em] uppercase font-bold mt-2 animate-glow-pulse-text">
-            BINGO
+            GAME MODES
           </p>
 
           {/* Bottom chrome bar with dots */}
@@ -170,29 +170,43 @@ export function StartScreen({ onStart }: StartScreenProps) {
           </div>
         </div>
 
-        {/* ── CTA ── */}
+        {/* ── CTA - Mode Selection ── */}
         <div
           className="w-full max-w-sm animate-fade-in-up"
           style={{ animationDelay: '0.7s' }}
         >
           <div className="flex items-center justify-center gap-3 mb-4">
             <span className="text-accent/40 font-mono text-xl select-none">[[</span>
-            <span className="text-chrome-accent text-xs tracking-[0.3em] uppercase">Ready to play?</span>
+            <span className="text-chrome-accent text-xs tracking-[0.3em] uppercase">Choose Your Mode</span>
             <span className="text-accent/40 font-mono text-xl select-none">]]</span>
           </div>
 
-          <button
-            onClick={onStart}
-            className="start-btn w-full relative overflow-hidden bg-accent hover:bg-accent-light active:bg-accent-glow text-chrome-dark font-black py-5 px-8 rounded-xs text-xl tracking-[0.18em] uppercase transition-colors duration-150 active:scale-95 animate-glow-pulse"
-            style={{
-              boxShadow: 'var(--shadow-glow-cyan-strong), inset 0 2px 0 rgba(232,232,232,0.3), inset 0 -2px 4px rgba(0,0,0,0.3)',
-            }}
-          >
-            START GAME
-          </button>
+          <div className="space-y-3">
+            {/* Bingo Mode Button */}
+            <button
+              onClick={() => onStart('bingo')}
+              className="start-btn w-full relative overflow-hidden bg-accent hover:bg-accent-light active:bg-accent-glow text-chrome-dark font-black py-5 px-8 rounded-xs text-xl tracking-[0.18em] uppercase transition-colors duration-150 active:scale-95 animate-glow-pulse"
+              style={{
+                boxShadow: 'var(--shadow-glow-cyan-strong), inset 0 2px 0 rgba(232,232,232,0.3), inset 0 -2px 4px rgba(0,0,0,0.3)',
+              }}
+            >
+              PLAY BINGO
+            </button>
 
-          <p className="text-chrome-accent text-xs text-center mt-3 tracking-wider uppercase">
-            Free Space auto-marked · 5 in a row wins
+            {/* Card Shuffle Mode Button */}
+            <button
+              onClick={() => onStart('cards')}
+              className="start-btn w-full relative overflow-hidden border-2 border-accent hover:border-accent-light bg-chrome-dark/50 hover:bg-chrome-dark/80 text-accent hover:text-accent-light font-black py-5 px-8 rounded-xs text-xl tracking-[0.18em] uppercase transition-all duration-150 active:scale-95"
+              style={{
+                boxShadow: 'var(--shadow-glow-cyan), inset 0 2px 0 rgba(0,217,255,0.1), inset 0 -2px 4px rgba(0,0,0,0.3)',
+              }}
+            >
+              DRAW CARDS
+            </button>
+          </div>
+
+          <p className="text-chrome-accent text-xs text-center mt-4 tracking-wider uppercase">
+            Bingo: 5 in a row · Cards: Random questions
           </p>
         </div>
 
