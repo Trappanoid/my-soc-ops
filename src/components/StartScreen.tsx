@@ -4,14 +4,20 @@ interface StartScreenProps {
 
 export function StartScreen({ onStart }: StartScreenProps) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-full p-6 bg-gray-50">
+    <div className="flex flex-col items-center justify-center min-h-full p-6" style={{ background: 'var(--gradient-chrome-subtle)', minHeight: '100vh' }}>
       <div className="text-center max-w-sm">
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">Soc Ops</h1>
-        <p className="text-lg text-gray-600 mb-8">Social Bingo</p>
+        <h1 className="text-6xl font-black text-platinum mb-1 tracking-wider" style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.7)', letterSpacing: '0.05em' }}>SOC OPS</h1>
+        <p className="text-xl text-accent mb-12 font-bold tracking-widest uppercase">SOCIAL BINGO</p>
         
-        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 mb-8">
-          <h2 className="font-semibold text-gray-800 mb-3">How to play</h2>
-          <ul className="text-left text-gray-600 text-sm space-y-2">
+        <div 
+          className="rounded-sm p-8 mb-8 border border-chrome-accent"
+          style={{ 
+            background: 'var(--gradient-chrome)',
+            boxShadow: 'var(--shadow-inset-light), var(--shadow-inset-dark), 0 4px 12px rgba(0, 0, 0, 0.6)'
+          }}
+        >
+          <h2 className="font-bold text-platinum mb-4 text-lg tracking-wider">HOW TO PLAY</h2>
+          <ul className="text-left text-silver text-sm space-y-2 font-medium">
             <li>• Find people who match the questions</li>
             <li>• Tap a square when you find a match</li>
             <li>• Get 5 in a row to win!</li>
@@ -20,7 +26,10 @@ export function StartScreen({ onStart }: StartScreenProps) {
 
         <button
           onClick={onStart}
-          className="w-full bg-accent text-white font-semibold py-4 px-8 rounded-lg text-lg active:bg-accent-light transition-colors"
+          className="w-full bg-accent hover:bg-accent-light active:bg-accent-glow text-chrome-dark font-black py-4 px-8 rounded-sm text-lg tracking-wide uppercase transition-all duration-200 transform hover:scale-105 active:scale-95"
+          style={{
+            boxShadow: 'var(--shadow-glow-cyan), inset 0 2px 0 rgba(232, 232, 232, 0.3), inset 0 -2px 4px rgba(0, 0, 0, 0.3)'
+          }}
         >
           Start Game
         </button>

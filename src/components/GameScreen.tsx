@@ -17,28 +17,37 @@ export function GameScreen({
   onReset,
 }: GameScreenProps) {
   return (
-    <div className="flex flex-col min-h-full bg-gray-50">
+    <div className="flex flex-col min-h-full" style={{ background: 'var(--gradient-chrome-subtle)' }}>
       {/* Header */}
-      <header className="flex items-center justify-between p-3 bg-white border-b border-gray-200">
+      <header 
+        className="flex items-center justify-between p-4 border-b-2 border-accent"
+        style={{ background: 'var(--gradient-chrome)', boxShadow: 'var(--shadow-inset-light), 0 4px 8px rgba(0, 0, 0, 0.6)' }}
+      >
         <button
           onClick={onReset}
-          className="text-gray-500 text-sm px-3 py-1.5 rounded active:bg-gray-100"
+          className="text-accent font-bold px-3 py-1.5 rounded-sm text-sm uppercase tracking-wide hover:bg-chrome-accent/30 active:bg-chrome-accent/50 transition-colors"
         >
-          ← Back
+          ← BACK
         </button>
-        <h1 className="font-bold text-gray-900">Soc Ops</h1>
+        <h1 className="font-black text-platinum text-lg tracking-wider">SOC OPS</h1>
         <div className="w-16"></div>
       </header>
 
       {/* Instructions */}
-      <p className="text-center text-gray-500 text-sm py-2 px-4">
+      <p className="text-center text-silver text-sm py-3 px-4 font-medium tracking-wide uppercase">
         Tap a square when you find someone who matches it.
       </p>
 
       {/* Bingo indicator */}
       {hasBingo && (
-        <div className="bg-amber-100 text-amber-800 text-center py-2 font-semibold text-sm">
-          🎉 BINGO! You got a line!
+        <div 
+          className="text-accent text-center py-3 font-black text-sm uppercase tracking-widest"
+          style={{ 
+            background: 'var(--gradient-chrome)',
+            boxShadow: 'var(--shadow-glow-cyan-strong), inset 0 1px 0 rgba(232, 232, 232, 0.1)'
+          }}
+        >
+          🎉 BINGO! YOU GOT A LINE!
         </div>
       )}
 

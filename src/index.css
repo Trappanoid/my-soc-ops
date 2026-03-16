@@ -1,11 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 @import 'tailwindcss';
 
 @theme {
-  --color-accent: #2563eb;
-  --color-accent-light: #3b82f6;
-  --color-marked: #dcfce7;
-  --color-marked-border: #22c55e;
-  --color-bingo: #fbbf24;
+  /* Typography */
+  --font-display: 'Space Mono', monospace;
+  
+  /* Primary Colors - Metallic Chrome Palette */
+  --color-chrome-dark: #0f1217;
+  --color-chrome-base: #1a1f2e;
+  --color-chrome-light: #2d3142;
+  --color-chrome-medium: #404555;
+  --color-chrome-accent: #5a6370;
+  --color-platinum: #e8e8e8;
+  --color-silver: #d0d0d0;
+  
+  /* Accent Colors */
+  --color-accent: #00d9ff;
+  --color-accent-light: #33e7ff;
+  --color-accent-glow: #00a8cc;
+  
+  /* Interactive States */
+  --color-marked: #00d9ff;
+  --color-marked-border: #00a8cc;
+  --color-bingo: #00d9ff;
+  --color-glow: #00d9ff;
+  
+  /* Shadows for metallic depth */
+  --shadow-inset-light: inset 0 1px 0 rgba(232, 232, 232, 0.1);
+  --shadow-inset-dark: inset 0 -2px 4px rgba(0, 0, 0, 0.5);
+  --shadow-glow-cyan: 0 0 12px rgba(0, 217, 255, 0.4);
+  --shadow-glow-cyan-strong: 0 0 20px rgba(0, 217, 255, 0.6);
+  
+  /* Gradients */
+  --gradient-chrome: linear-gradient(180deg, #2d3142 0%, #1a1f2e 100%);
+  --gradient-chrome-subtle: linear-gradient(180deg, #1a1f2e 0%, #0f1217 100%);
+  --gradient-shine: linear-gradient(90deg, transparent, rgba(232, 232, 232, 0.2), transparent);
 }
 
 html,
@@ -16,6 +45,55 @@ body,
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: 'Space Mono', monospace;
   -webkit-tap-highlight-color: transparent;
+  letter-spacing: 0.02em;
+}
+
+/* Animations */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(0, 217, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(0, 217, 255, 0.8);
+  }
+}
+
+@keyframes metallic-shine {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@layer utilities {
+  .animate-glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+  
+  .animate-metallic-shine {
+    animation: metallic-shine 3s ease-in-out infinite;
+    background-size: 200% 100%;
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+  }
 }
