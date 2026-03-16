@@ -35,6 +35,11 @@
   --gradient-chrome: linear-gradient(180deg, #2d3142 0%, #1a1f2e 100%);
   --gradient-chrome-subtle: linear-gradient(180deg, #1a1f2e 0%, #0f1217 100%);
   --gradient-shine: linear-gradient(90deg, transparent, rgba(232, 232, 232, 0.2), transparent);
+
+  /* Animation timing tokens */
+  --animation-delay-1: 0.15s;
+  --animation-delay-2: 0.35s;
+  --animation-delay-3: 0.6s;
 }
 
 html,
@@ -83,6 +88,17 @@ body {
   }
 }
 
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @layer utilities {
   .animate-glow-pulse {
     animation: glow-pulse 2s ease-in-out infinite;
@@ -95,5 +111,25 @@ body {
   
   .animate-shimmer {
     animation: shimmer 2s infinite;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  .animate-fade-in-d1 {
+    animation: fade-in 0.6s ease-out var(--animation-delay-1) forwards;
+    opacity: 0;
+  }
+
+  .animate-fade-in-d2 {
+    animation: fade-in 0.6s ease-out var(--animation-delay-2) forwards;
+    opacity: 0;
+  }
+
+  .animate-fade-in-d3 {
+    animation: fade-in 0.6s ease-out var(--animation-delay-3) forwards;
+    opacity: 0;
   }
 }
