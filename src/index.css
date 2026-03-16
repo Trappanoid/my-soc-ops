@@ -35,6 +35,9 @@
   --gradient-chrome: linear-gradient(180deg, #2d3142 0%, #1a1f2e 100%);
   --gradient-chrome-subtle: linear-gradient(180deg, #1a1f2e 0%, #0f1217 100%);
   --gradient-shine: linear-gradient(90deg, transparent, rgba(232, 232, 232, 0.2), transparent);
+
+  /* Custom font sizes */
+  --font-size-xxs: 9px;
 }
 
 html,
@@ -83,6 +86,33 @@ body {
   }
 }
 
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(0, 217, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 217, 255, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.shine-title {
+  background: linear-gradient(90deg, #b0b0b0 0%, #ffffff 35%, #e0e0e0 50%, #ffffff 65%, #b0b0b0 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: metallic-shine 4s ease-in-out infinite;
+}
+
 @layer utilities {
   .animate-glow-pulse {
     animation: glow-pulse 2s ease-in-out infinite;
@@ -95,5 +125,18 @@ body {
   
   .animate-shimmer {
     animation: shimmer 2s infinite;
+  }
+
+  .animate-fade-in-0 {
+    animation: fade-in-up 0.6s ease-out both;
+  }
+  .animate-fade-in-1 {
+    animation: fade-in-up 0.6s ease-out 0.15s both;
+  }
+  .animate-fade-in-2 {
+    animation: fade-in-up 0.6s ease-out 0.3s both;
+  }
+  .animate-fade-in-3 {
+    animation: fade-in-up 0.6s ease-out 0.45s both;
   }
 }
