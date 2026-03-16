@@ -4,32 +4,55 @@ interface StartScreenProps {
 
 export function StartScreen({ onStart }: StartScreenProps) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-full p-6" style={{ background: 'var(--gradient-chrome-subtle)', minHeight: '100vh' }}>
-      <div className="text-center max-w-sm">
-        <h1 className="text-6xl font-black text-platinum mb-1 tracking-wider" style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.7)', letterSpacing: '0.05em' }}>SOC OPS</h1>
-        <p className="text-xl text-accent mb-12 font-bold tracking-widest uppercase">SOCIAL BINGO</p>
-        
-        <div 
-          className="rounded-sm p-8 mb-8 border border-chrome-accent"
-          style={{ 
-            background: 'var(--gradient-chrome)',
-            boxShadow: 'var(--shadow-inset-light), var(--shadow-inset-dark), 0 4px 12px rgba(0, 0, 0, 0.6)'
-          }}
+    <div
+      className="flex flex-col items-center justify-center min-h-screen px-8 py-20"
+      style={{ background: 'var(--gradient-chrome-subtle)' }}
+    >
+      {/* Hero */}
+      <div className="text-center mb-20 animate-fade-in">
+        <h1
+          className="text-8xl font-black text-platinum"
+          style={{ letterSpacing: '0.1em' }}
         >
-          <h2 className="font-bold text-platinum mb-4 text-lg tracking-wider">HOW TO PLAY</h2>
-          <ul className="text-left text-silver text-sm space-y-2 font-medium">
-            <li>• Find people who match the questions</li>
-            <li>• Tap a square when you find a match</li>
-            <li>• Get 5 in a row to win!</li>
-          </ul>
-        </div>
+          SOC OPS
+        </h1>
+        <p className="text-sm text-chrome-accent tracking-widest uppercase mt-5 animate-fade-in-d1">
+          Security team social bingo
+        </p>
+      </div>
 
+      {/* How to Play */}
+      <div className="mb-20 animate-fade-in-d2">
+        <p className="text-xs text-chrome-accent tracking-widest uppercase mb-8 text-center">
+          How to Play
+        </p>
+        <ol className="text-silver text-sm space-y-5 leading-loose max-w-xs">
+          <li className="flex gap-5">
+            <span className="text-chrome-accent font-bold shrink-0">1</span>
+            <span>Find people who match the questions on your card</span>
+          </li>
+          <li className="flex gap-5">
+            <span className="text-chrome-accent font-bold shrink-0">2</span>
+            <span>Tap a square when you find a match</span>
+          </li>
+          <li className="flex gap-5">
+            <span className="text-chrome-accent font-bold shrink-0">3</span>
+            <span>Get 5 in a row to win!</span>
+          </li>
+        </ol>
+      </div>
+
+      {/* CTA */}
+      <div className="animate-fade-in-d3">
         <button
           onClick={onStart}
-          className="w-full bg-accent hover:bg-accent-light active:bg-accent-glow text-chrome-dark font-black py-4 px-8 rounded-sm text-lg tracking-wide uppercase transition-all duration-200 transform hover:scale-105 active:scale-95"
-          style={{
-            boxShadow: 'var(--shadow-glow-cyan), inset 0 2px 0 rgba(232, 232, 232, 0.3), inset 0 -2px 4px rgba(0, 0, 0, 0.3)'
-          }}
+          className={[
+            'bg-accent hover:bg-accent-light active:bg-accent-glow',
+            'text-chrome-dark font-black py-6 px-12 text-sm',
+            'tracking-widest uppercase',
+            'transition-transform duration-200 hover:scale-105 active:scale-95',
+          ].join(' ')}
+          style={{ boxShadow: 'var(--shadow-glow-cyan)' }}
         >
           Start Game
         </button>
